@@ -13,8 +13,9 @@ var dy = 0;
 var x = -1;
 var y = -1;
 
-score = 0;
-
+var score = 0;
+var speed = 150;
+var wall = true;
 function init() {
     document.hasFocus = true;
     document.onkeydown = function (event) {
@@ -58,16 +59,17 @@ function TestSnakeCollisionOrOutOfBound() {
     for (let i = 4; i < snake.length; i += 1)
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y)
             return true;
-    if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x > Canvas.width - 10 || snake[0].y > Canvas.height - 10)
+    if (wall && (snake[0].x < 0 || snake[0].y < 0 ||
+        snake[0].x > Canvas.width - 10 || snake[0].y > Canvas.height - 10))
         return true;
     return false;
 }
-function Rand(max) {
-    return Math.round((Math.random() * max) / 10) * 10;
+function Rand(min, max) {
+    return Math.round((Math.random() * (max - min) + min) / 10) * 10;
 }
 function createFood() {
-    x = Rand(Canvas.width - 10);
-    y = Rand(Canvas.height - 10);
+    x = Rand(10, Canvas.width - 20);
+    y = Rand(10, Canvas.height - 20);
     snake.forEach(TestFoodOnSnake);
 }
 function TestFoodOnSnake(snakePart) {
