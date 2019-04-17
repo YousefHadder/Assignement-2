@@ -14,8 +14,9 @@ var x = -1;
 var y = -1;
 
 var score = 0;
-var speed = 150;
-var wall = true;
+var speed = 125;
+let wall = true;
+
 function init() {
     document.hasFocus = true;
     document.onkeydown = function (event) {
@@ -53,7 +54,7 @@ function main() {
         moveSnake();
         drawSnake();
         main();
-    }, 150)
+    }, speed)
 }
 function TestSnakeCollisionOrOutOfBound() {
     for (let i = 4; i < snake.length; i += 1)
@@ -110,6 +111,12 @@ function drawSnake() {
 function drawSnakePart(snakePart) {
     ctx.fillStyle = "red";
     ctx.strokeStyle = "darkred";
+    if(!wall){
+        snakePart.x+=Canvas.width;
+        snakePart.x%=Canvas.width;
+        snakePart.y+=Canvas.height;
+        snakePart.y%=Canvas.height;
+    }
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
