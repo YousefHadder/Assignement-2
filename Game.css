@@ -1,12 +1,13 @@
-body {
-    background-color: #000000;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+body,html {
+    position: relative;
+    background-image: url("snake.jpg");
+    background-repeat:no-repeat;
+    background-size:100% 100vh;
     text-align: center;
 }
 
 canvas {
+    background-color: black;
     border-style: solid;
     border-width: 10px;
     border-color: #FFFFFF;
